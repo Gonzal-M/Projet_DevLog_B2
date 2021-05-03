@@ -17,6 +17,7 @@ public class TourManager : MonoBehaviour
     bool isBMtaken;
     bool isBDtaken;
 
+    GameObject buttonClicked;
     public GameObject prefabCroix;
 
     bool finTour;
@@ -33,13 +34,13 @@ public class TourManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void ChoixCase(){
-        if(!finTour){   //Si c'est le tour du joueur
-            Debug.Log("boop");
-            GameObject buttonClicked = EventSystem.current.currentSelectedGameObject; //Récupère la case sur laquelle le joueur a cliqué
+    public void CheckCase(string nomBouton){
+        if(!finTour){   //Si c'est le tour du joueur  
+            buttonClicked = GameObject.Find(nomBouton);
+            Debug.Log("fonction");  
             switch(buttonClicked.name){ //Selon le nom de la case (qui correspond à sa position)
                 case "HG":  //Haut Gauche
                     if(!isHGtaken){ //Si la case n'est pas prise
