@@ -18,7 +18,9 @@ public class TourManager : MonoBehaviour
     bool isBDtaken;
 
     GameObject buttonClicked;
-    public GameObject prefabCroix;
+
+    public Sprite croix;
+    public Sprite cercle;
 
     bool finTour;
 
@@ -40,14 +42,13 @@ public class TourManager : MonoBehaviour
     public void CheckCase(string nomBouton){
         if(!finTour){   //Si c'est le tour du joueur  
             buttonClicked = GameObject.Find(nomBouton);
-            Debug.Log("fonction");  
             switch(buttonClicked.name){ //Selon le nom de la case (qui correspond à sa position)
                 case "HG":  //Haut Gauche
                     if(!isHGtaken){ //Si la case n'est pas prise
                         PlaceCroix(buttonClicked);   //Place la croix à l'endroit sélectionné
                         isHGtaken = true;   //Indique que la case est maintenant prise
                     }else{          //Si la case est prise
-                        ShowCasePriseText();    //L'indique au joueur avec un message
+                        StartCoroutine(ShowCasePriseText());    //L'indique au joueur avec un message
                     }
                     break;
                 case "HM":  //Haut Milieu 
@@ -55,7 +56,7 @@ public class TourManager : MonoBehaviour
                         PlaceCroix(buttonClicked);
                         isHMtaken = true;
                     }else{
-                        ShowCasePriseText();
+                        StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "HD":  //Haut Droite
@@ -63,7 +64,7 @@ public class TourManager : MonoBehaviour
                         PlaceCroix(buttonClicked);
                         isHDtaken = true;
                     }else{
-                        ShowCasePriseText();
+                        StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "MG":  //Milieu Gauche
@@ -71,7 +72,7 @@ public class TourManager : MonoBehaviour
                         PlaceCroix(buttonClicked);
                         isMGtaken = true;
                     }else{
-                        ShowCasePriseText();
+                        StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "MM":  //Milieu Milieu 
@@ -79,7 +80,7 @@ public class TourManager : MonoBehaviour
                         PlaceCroix(buttonClicked);
                         isMMtaken = true;
                     }else{
-                        ShowCasePriseText();
+                        StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "MD":  //Milieu Droite
@@ -87,7 +88,7 @@ public class TourManager : MonoBehaviour
                         PlaceCroix(buttonClicked);
                         isMDtaken = true;   
                     }else{
-                        ShowCasePriseText();
+                        StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "BG":  //Bas Gauche
@@ -95,7 +96,7 @@ public class TourManager : MonoBehaviour
                         PlaceCroix(buttonClicked);
                         isBGtaken = true;  
                     }else{
-                        ShowCasePriseText();
+                        StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "BM":  //Bas Milieu
@@ -103,7 +104,7 @@ public class TourManager : MonoBehaviour
                         PlaceCroix(buttonClicked);
                         isBMtaken = true; 
                     }else{
-                        ShowCasePriseText();
+                        StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "BD":  //Bas Droite
@@ -111,7 +112,7 @@ public class TourManager : MonoBehaviour
                         PlaceCroix(buttonClicked);
                         isBDtaken = true;
                     }else{
-                        ShowCasePriseText();
+                        StartCoroutine(ShowCasePriseText());;
                     }
                     break;
             }
@@ -125,7 +126,7 @@ public class TourManager : MonoBehaviour
         CasePriseText.SetActive(false); //Désactive le texte
     }
     void PlaceCroix(GameObject buttonClicked){
-        Instantiate(prefabCroix, buttonClicked.transform.position, buttonClicked.transform.rotation);   //Fait apparaitre la croix à la position de la case choisie
+        buttonClicked.GetComponent<ClicCase>().ChangeImage(croix);
         finTour = true; //Indique que le tour du joueur est terminé
         TourDeQui.SetText("Tour de l'Adversaire");  //Affiche qu'il s'agit maintenant du tour de l'adversaire
     }
