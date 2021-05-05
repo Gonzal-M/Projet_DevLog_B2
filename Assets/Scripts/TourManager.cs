@@ -49,6 +49,11 @@ public class TourManager : MonoBehaviour
                 finJeu = true;
                 PartieFinie.SetActive(true);
                 gagnant.text = "Joueur O a gagné !";
+            //Si personne n'a gagné mais que toutes les cases sont prises, alors il y a égalité
+            }else if(isHGtaken != null && isHMtaken != null && isHDtaken != null && isMGtaken != null && isMMtaken != null && isMDtaken != null && isBGtaken != null && isBMtaken != null && isBDtaken != null){
+                finJeu = true;
+                PartieFinie.SetActive(true);
+                gagnant.text = "Egalité !";
             }
         }
         
