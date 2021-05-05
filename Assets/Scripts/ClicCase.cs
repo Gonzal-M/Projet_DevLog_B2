@@ -22,11 +22,11 @@ public class ClicCase : MonoBehaviour
     }
 
     public void ChoixCase(){
-        tourManager.CheckCase(gameObject.name);
+        tourManager.CheckCase(gameObject.name); //quand le joueur clique sur une case, cette fonction renvoie le nom de la case choisie à la fonction du TourManager
     }
 
     public void ChangeImage(Sprite symbole){
-        image.enabled = true;
-        image.sprite = symbole;
+        image.enabled = true;   //active l'image
+        image.sprite = symbole; //met l'image du symbole donné (X ou O)
     }
 }

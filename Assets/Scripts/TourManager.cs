@@ -7,12 +7,12 @@ using UnityEngine.UI;
 
 public class TourManager : MonoBehaviour
 {
-    string isHGtaken;
-    string isHMtaken;
-    string isHDtaken;
-    string isMGtaken;
-    string isMMtaken;
-    string isMDtaken;
+    string isHGtaken;   //Enregistre le nom du symbole dans la case donnée (ici, HG = Haut Gauche)
+    string isHMtaken;   //Si la case donnée n'a pas été cliquée, elle est vide et n'a pas stocké de nom
+    string isHDtaken;   //Donc : 
+    string isMGtaken;   //Si une de ces variables a une valeur "croix", alors elle est déjà remplie, et elle est remplie par Joueur X
+    string isMMtaken;   //Si une de ces variables a une valeur "cercle", alors elle est déjà remplie, et elle est remplie par Joueur O
+    string isMDtaken;   //Si une de ces variables a une valeur null, alors la case est vide et donc disponible/cliquable
     string isBGtaken;
     string isBMtaken;
     string isBDtaken;
@@ -23,7 +23,7 @@ public class TourManager : MonoBehaviour
     public Sprite cercle;
 
     bool finTour;
-    public bool finJeu;
+    bool finJeu;
 
     public GameObject PartieFinie;
     Text gagnant;
@@ -39,13 +39,13 @@ public class TourManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!finJeu){
-            if(CheckWin("croix")){
-                finJeu = true;
-                PartieFinie.SetActive(true);
-                gagnant.text = "Joueur X a gagné !"; 
+        if(!finJeu){    //tant que la partie n'est pas finie...
+            if(CheckWin("croix")){  //...vérifie si le joueur X a gagné...
+                finJeu = true;      //...si oui, la partie est finie,...
+                PartieFinie.SetActive(true);    //...un nouvel écran s'affiche...
+                gagnant.text = "Joueur X a gagné !";    //...et affiche que le joueur X a gagné
             }
-            else if(CheckWin("cercle")){
+            else if(CheckWin("cercle")){    //...vérifie si le joueur O a gagné et fait la même chose qu'avec X
                 finJeu = true;
                 PartieFinie.SetActive(true);
                 gagnant.text = "Joueur O a gagné !";
@@ -142,7 +142,7 @@ public class TourManager : MonoBehaviour
     }
     void PlaceCroix(GameObject buttonClicked){
         buttonClicked.GetComponent<ClicCase>().ChangeImage(croix);  //Affiche une croix à l'emplacement choisi
-        //finTour = true; //Indique que le tour du joueur est terminé
+        finTour = true; //Indique que le tour du joueur est terminé
         TourDeQui.SetText("Tour de l'Adversaire");  //Affiche qu'il s'agit maintenant du tour de l'adversaire
     }
 
