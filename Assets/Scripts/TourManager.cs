@@ -7,15 +7,15 @@ using UnityEngine.UI;
 
 public class TourManager : MonoBehaviour
 {
-    bool isHGtaken;
-    bool isHMtaken;
-    bool isHDtaken;
-    bool isMGtaken;
-    bool isMMtaken;
-    bool isMDtaken;
-    bool isBGtaken;
-    bool isBMtaken;
-    bool isBDtaken;
+    string isHGtaken;
+    string isHMtaken;
+    string isHDtaken;
+    string isMGtaken;
+    string isMMtaken;
+    string isMDtaken;
+    string isBGtaken;
+    string isBMtaken;
+    string isBDtaken;
 
     GameObject buttonClicked;
 
@@ -23,20 +23,35 @@ public class TourManager : MonoBehaviour
     public Sprite cercle;
 
     bool finTour;
+    public bool finJeu;
 
+    public GameObject PartieFinie;
+    Text gagnant;
     public GameObject CasePriseText;
     public TextMeshProUGUI TourDeQui;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gagnant = PartieFinie.transform.Find("Image/Text").GetComponent<Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(!finJeu){
+            if(CheckWin("croix")){
+                finJeu = true;
+                PartieFinie.SetActive(true);
+                gagnant.text = "Joueur X a gagné !"; 
+            }
+            else if(CheckWin("cercle")){
+                finJeu = true;
+                PartieFinie.SetActive(true);
+                gagnant.text = "Joueur O a gagné !";
+            }
+        }
+        
     }
 
     public void CheckCase(string nomBouton){
@@ -44,73 +59,73 @@ public class TourManager : MonoBehaviour
             buttonClicked = GameObject.Find(nomBouton);
             switch(buttonClicked.name){ //Selon le nom de la case (qui correspond à sa position)
                 case "HG":  //Haut Gauche
-                    if(!isHGtaken){ //Si la case n'est pas prise
+                    if(isHGtaken == null){ //Si la case n'est pas prise
                         PlaceCroix(buttonClicked);   //Place la croix à l'endroit sélectionné
-                        isHGtaken = true;   //Indique que la case est maintenant prise
+                        isHGtaken = "croix";   //Indique que la case est maintenant prise
                     }else{          //Si la case est prise
                         StartCoroutine(ShowCasePriseText());    //L'indique au joueur avec un message
                     }
                     break;
                 case "HM":  //Haut Milieu 
-                    if(!isHMtaken){
+                    if(isHMtaken == null){
                         PlaceCroix(buttonClicked);
-                        isHMtaken = true;
+                        isHMtaken = "croix";
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "HD":  //Haut Droite
-                    if(!isHDtaken){
+                    if(isHDtaken == null){
                         PlaceCroix(buttonClicked);
-                        isHDtaken = true;
+                        isHDtaken = "croix";
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "MG":  //Milieu Gauche
-                    if(!isMGtaken){
+                    if(isMGtaken == null){
                         PlaceCroix(buttonClicked);
-                        isMGtaken = true;
+                        isMGtaken = "croix";
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "MM":  //Milieu Milieu 
-                    if(!isMMtaken){
+                    if(isMMtaken == null){
                         PlaceCroix(buttonClicked);
-                        isMMtaken = true;
+                        isMMtaken = "croix";
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "MD":  //Milieu Droite
-                    if(!isMDtaken){
+                    if(isMDtaken == null){
                         PlaceCroix(buttonClicked);
-                        isMDtaken = true;   
+                        isMDtaken = "croix";   
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "BG":  //Bas Gauche
-                    if(!isBGtaken){
+                    if(isBGtaken == null){
                         PlaceCroix(buttonClicked);
-                        isBGtaken = true;  
+                        isBGtaken = "croix";  
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "BM":  //Bas Milieu
-                    if(!isBMtaken){
+                    if(isBMtaken == null){
                         PlaceCroix(buttonClicked);
-                        isBMtaken = true; 
+                        isBMtaken = "croix"; 
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "BD":  //Bas Droite
-                    if(!isBDtaken){
+                    if(isBDtaken == null){
                         PlaceCroix(buttonClicked);
-                        isBDtaken = true;
+                        isBDtaken = "croix";
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
@@ -126,8 +141,23 @@ public class TourManager : MonoBehaviour
         CasePriseText.SetActive(false); //Désactive le texte
     }
     void PlaceCroix(GameObject buttonClicked){
-        buttonClicked.GetComponent<ClicCase>().ChangeImage(croix);
-        finTour = true; //Indique que le tour du joueur est terminé
+        buttonClicked.GetComponent<ClicCase>().ChangeImage(croix);  //Affiche une croix à l'emplacement choisi
+        //finTour = true; //Indique que le tour du joueur est terminé
         TourDeQui.SetText("Tour de l'Adversaire");  //Affiche qu'il s'agit maintenant du tour de l'adversaire
+    }
+
+    bool CheckWin(string symbole){
+        //Condition if qui vérifie toutes les combinaisons gagnantes possibles pour le joueur donné
+        if((isHGtaken == symbole && isHMtaken == symbole && isHDtaken == symbole) ||    //ligne du haut
+        (isMGtaken == symbole && isMMtaken == symbole && isMDtaken == symbole) ||       //ligne du milieu
+        (isBGtaken == symbole && isBMtaken == symbole && isBDtaken == symbole) ||       //ligne du bas
+        (isHGtaken == symbole && isMGtaken == symbole && isBGtaken == symbole) ||       //colonne de gauche
+        (isHMtaken == symbole && isMMtaken == symbole && isBMtaken == symbole) ||       //colonne du milieu
+        (isHDtaken == symbole && isMDtaken == symbole && isBDtaken == symbole) ||       //colonne de droite
+        (isHGtaken == symbole && isMMtaken == symbole && isBDtaken == symbole) ||       //diagonale \ 
+        (isHDtaken == symbole && isMMtaken == symbole && isBGtaken == symbole)){        //diagonale / 
+            return true;
+        }
+        return false;
     }
 }
