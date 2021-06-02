@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class ClicCase : MonoBehaviour
 {
@@ -12,17 +15,18 @@ public class ClicCase : MonoBehaviour
     void Start()
     {
         tourManager = GameObject.Find("GameManager").GetComponent<TourManager>();
+
         image = gameObject.GetComponent<Image>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ChoixCase(){
-        tourManager.CheckCase(gameObject.name); //quand le joueur clique sur une case, cette fonction renvoie le nom de la case choisie à la fonction du TourManager
+        tourManager.photonView.RPC("CheckCase", RpcTarget.All, gameObject.name);    //quand le joueur clique sur une case, cette fonction renvoie le nom de la case choisie à la fonction du TourManager
     }
 
     public void ChangeImage(Sprite symbole){

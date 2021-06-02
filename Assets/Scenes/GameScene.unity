@@ -351,7 +351,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Fin de la partie !
+  m_Text: "Joueur X a gagn\xE9 !"
 --- !u!222 &568669683
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3039,6 +3039,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2118337109}
   - component: {fileID: 2118337110}
+  - component: {fileID: 2118337111}
+  - component: {fileID: 2118337112}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3072,12 +3074,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5230ba8ea23197846b41d2f5cb0a1578, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  photonView: {fileID: 0}
   croix: {fileID: 21300000, guid: b714fe3a2ef81cc4882ff1b5fcab7146, type: 3}
   cercle: {fileID: 21300000, guid: fb13bd536cf21d1428871b2769ac2209, type: 3}
-  finJeu: 0
   PartieFinie: {fileID: 1714695233}
   CasePriseText: {fileID: 1326384971}
   TourDeQui: {fileID: 1048003665}
+--- !u!114 &2118337111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118337108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &2118337112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118337108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27d25458077946246b584b3bd7ed59f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2128228128
 GameObject:
   m_ObjectHideFlags: 0
