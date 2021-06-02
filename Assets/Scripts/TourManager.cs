@@ -147,7 +147,7 @@ public class TourManager : MonoBehaviour
     }
     void PlaceCroix(GameObject buttonClicked){
         buttonClicked.GetComponent<ClicCase>().ChangeImage(croix);  //Affiche une croix à l'emplacement choisi
-        finTour = true; //Indique que le tour du joueur est terminé
+        //finTour = true; //Indique que le tour du joueur est terminé
         TourDeQui.SetText("Tour de l'Adversaire");  //Affiche qu'il s'agit maintenant du tour de l'adversaire
     }
 
