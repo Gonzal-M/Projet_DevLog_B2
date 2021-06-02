@@ -65,77 +65,67 @@ public class TourManager : MonoBehaviourPun
 
     [PunRPC]
     public void CheckCase(string nomBouton){
-        string symbole = "";
         if(!finTour){   //Si c'est le tour du joueur       
             switch(nomBouton){ //Selon le nom de la case (qui correspond à sa position)
                 case "HG":  //Haut Gauche
                     if(isHGtaken == null){ //Si la case n'est pas prise
-                        symbole = PlaceImage(nomBouton);   //Place la croix à l'endroit sélectionné
-                        isHGtaken = symbole;   //Indique que la case est maintenant prise
+                        isHGtaken = PlaceImage(nomBouton);   //Place le symbole à l'endroit sélectionné et indique que la case est prise
                     }else{          //Si la case est prise
                         StartCoroutine(ShowCasePriseText());    //L'indique au joueur avec un message
                     }
                     break;
                 case "HM":  //Haut Milieu 
                     if(isHMtaken == null){
-                        symbole = PlaceImage(nomBouton);
-                        isHMtaken = symbole;
+                        isHMtaken = PlaceImage(nomBouton);
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "HD":  //Haut Droite
                     if(isHDtaken == null){
-                        symbole = PlaceImage(nomBouton);
-                        isHDtaken = symbole;
+                        isHDtaken = PlaceImage(nomBouton);
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "MG":  //Milieu Gauche
                     if(isMGtaken == null){
-                        symbole = PlaceImage(nomBouton);
-                        isMGtaken = symbole;
+                        isMGtaken = PlaceImage(nomBouton);
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "MM":  //Milieu Milieu 
                     if(isMMtaken == null){
-                        symbole = PlaceImage(nomBouton);
-                        isMMtaken = symbole;
+                        isMMtaken = PlaceImage(nomBouton);
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "MD":  //Milieu Droite
                     if(isMDtaken == null){
-                        symbole = PlaceImage(nomBouton);
-                        isMDtaken = symbole;   
+                        isMDtaken = PlaceImage(nomBouton); 
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "BG":  //Bas Gauche
                     if(isBGtaken == null){
-                        symbole = PlaceImage(nomBouton);
-                        isBGtaken = symbole;  
+                        isBGtaken = PlaceImage(nomBouton);
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "BM":  //Bas Milieu
                     if(isBMtaken == null){
-                        symbole = PlaceImage(nomBouton);
-                        isBMtaken = symbole; 
+                        isBMtaken = PlaceImage(nomBouton);
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
                     break;
                 case "BD":  //Bas Droite
                     if(isBDtaken == null){
-                        symbole = PlaceImage(nomBouton);
-                        isBDtaken = symbole;
+                        isBDtaken = PlaceImage(nomBouton);
                     }else{
                         StartCoroutine(ShowCasePriseText());;
                     }
@@ -156,13 +146,11 @@ public class TourManager : MonoBehaviourPun
         if(AQuiLeTour){
             buttonClicked.GetComponent<ClicCase>().ChangeImage(cercle);
             TourDeQui.SetText("Tour du Joueur X");  //Affiche qu'il s'agit maintenant du tour du Joueur X
-            //finTour = true; //Indique que le tour du joueur actuel est terminé
             AQuiLeTour = !AQuiLeTour;   //Change de tour
             return "cercle";    //renvoie la valeur à enregistrer dans la variable is[NomDeCase]taken
         }else{
             buttonClicked.GetComponent<ClicCase>().ChangeImage(croix);
             TourDeQui.SetText("Tour du Joueur O");  //Affiche qu'il s'agit maintenant du tour du Joueur O
-            //finTour = true;
             AQuiLeTour = !AQuiLeTour;
             return "croix";
         }  

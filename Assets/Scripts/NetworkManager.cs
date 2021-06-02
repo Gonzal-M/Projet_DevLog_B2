@@ -12,12 +12,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         ConnectToServer();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void ConnectToServer()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -47,7 +41,5 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Debug.Log("A new player joined the room");
         base.OnPlayerEnteredRoom(newPlayer);
-
-
     }
 }
